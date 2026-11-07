@@ -6,7 +6,7 @@
 
 Genera DeparturePixelZh y DeparturePixelZh Compact a partir de una receta versionada. Combina letras inglesas, caracteres chinos de estilo píxel e iconos para desarrolladores en una fuente monoespaciada.
 
-Este repositorio contiene el código del constructor. Las fuentes precompiladas aún no se publican y los derechos de redistribución de los iconos siguen en revisión en los avisos del proyecto de fuentes.
+Descarga los [paquetes de fuentes para escritorio o web](https://github.com/codingEzio/DeparturePixelZh-OSS/releases/tag/v0.1.1). Los registros originales sobre los derechos de algunos iconos difieren; consulta los [avisos de las fuentes](https://github.com/codingEzio/DeparturePixelZh-OSS/blob/main/NOTICE.md).
 
 ![DeparturePixelZh — letras inglesas y caracteres chinos de estilo píxel en una fuente monoespaciada](assets/departurepixelzh-social-card.png)
 
@@ -16,6 +16,7 @@ Instala [uv](https://docs.astral.sh/uv/) y coloca el repositorio de fuentes Depa
 
 ```sh
 git clone https://github.com/codingEzio/DeparturePixelZh-OSS.git ../X-DeparturePixelZh
+git checkout --detach "$(cat ../X-DeparturePixelZh/builder-version)"
 uv run departurepixelzh-builder build --recipe ../X-DeparturePixelZh/recipe.json --output Build
 uv run departurepixelzh-builder check --recipe ../X-DeparturePixelZh/recipe.json --output Build --release
 uv run -m unittest discover -s tests

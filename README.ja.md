@@ -6,7 +6,7 @@
 
 バージョン管理されたレシピからDeparturePixelZhとDeparturePixelZh Compactを生成します。英字と中国語のピクセル字形、開発者向けアイコンを一つの等幅フォントにまとめます。
 
-これはビルダーのソースです。ビルド済みフォントは未公開で、アイコンの再配布権はフォント側の通知文書で確認中です。
+[デスクトップ版または Web 版のフォントパッケージ](https://github.com/codingEzio/DeparturePixelZh-OSS/releases/tag/v0.1.1)をダウンロードできます。一部アイコンの上流ライセンス記録には相違があります。[フォントの通知文書](https://github.com/codingEzio/DeparturePixelZh-OSS/blob/main/NOTICE.md)を参照してください。
 
 ![DeparturePixelZh — 英字と中国語のピクセル字形を一つの等幅フォントに](assets/departurepixelzh-social-card.png)
 
@@ -16,6 +16,7 @@
 
 ```sh
 git clone https://github.com/codingEzio/DeparturePixelZh-OSS.git ../X-DeparturePixelZh
+git checkout --detach "$(cat ../X-DeparturePixelZh/builder-version)"
 uv run departurepixelzh-builder build --recipe ../X-DeparturePixelZh/recipe.json --output Build
 uv run departurepixelzh-builder check --recipe ../X-DeparturePixelZh/recipe.json --output Build --release
 uv run -m unittest discover -s tests

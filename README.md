@@ -6,7 +6,7 @@
 
 Build the DeparturePixelZh and DeparturePixelZh Compact fonts from a versioned recipe. The result combines English and Chinese pixel glyphs in one monospaced font, with developer icons.
 
-This is the builder source. Prebuilt fonts are not published here; icon redistribution rights are still under review in the font project’s notices.
+Download the [desktop or web font packages](https://github.com/codingEzio/DeparturePixelZh-OSS/releases/tag/v0.1.1). Upstream records for some icon rights differ; see the [font notices](https://github.com/codingEzio/DeparturePixelZh-OSS/blob/main/NOTICE.md).
 
 ![DeparturePixelZh — English and Chinese pixel glyphs in one monospaced font](assets/departurepixelzh-social-card.png)
 
@@ -16,6 +16,7 @@ Install [uv](https://docs.astral.sh/uv/) and place the DeparturePixelZh font rep
 
 ```sh
 git clone https://github.com/codingEzio/DeparturePixelZh-OSS.git ../X-DeparturePixelZh
+git checkout --detach "$(cat ../X-DeparturePixelZh/builder-version)"
 uv run departurepixelzh-builder build --recipe ../X-DeparturePixelZh/recipe.json --output Build
 uv run departurepixelzh-builder check --recipe ../X-DeparturePixelZh/recipe.json --output Build --release
 uv run -m unittest discover -s tests

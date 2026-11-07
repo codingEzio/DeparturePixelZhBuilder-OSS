@@ -6,7 +6,7 @@
 
 按版本化配方构建 DeparturePixelZh 和 DeparturePixelZh Compact，把英文像素字、中文像素字和开发者图标合进一款等宽字体。
 
-这里提供构建器源码，尚未发布预构建字体；图标的再分发权利仍在字体项目的许可说明中审查。
+下载[桌面或网页字体包](https://github.com/codingEzio/DeparturePixelZh-OSS/releases/tag/v0.1.1)。部分图标的上游授权记录存在差异，详见[字体许可说明](https://github.com/codingEzio/DeparturePixelZh-OSS/blob/main/NOTICE.md)。
 
 ![DeparturePixelZh：一款字体，中英像素等宽](assets/departurepixelzh-social-card.png)
 
@@ -16,6 +16,7 @@
 
 ```sh
 git clone https://github.com/codingEzio/DeparturePixelZh-OSS.git ../X-DeparturePixelZh
+git checkout --detach "$(cat ../X-DeparturePixelZh/builder-version)"
 uv run departurepixelzh-builder build --recipe ../X-DeparturePixelZh/recipe.json --output Build
 uv run departurepixelzh-builder check --recipe ../X-DeparturePixelZh/recipe.json --output Build --release
 uv run -m unittest discover -s tests

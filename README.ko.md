@@ -6,7 +6,7 @@
 
 버전이 관리되는 레시피로 DeparturePixelZh와 DeparturePixelZh Compact를 만듭니다. 영문과 중국어 픽셀 글자, 개발자 아이콘을 하나의 고정폭 글꼴로 조합합니다.
 
-이 저장소는 빌더 소스입니다. 미리 빌드한 글꼴은 공개되지 않았으며 아이콘 재배포 권리는 글꼴 프로젝트의 고지에서 검토 중입니다.
+[데스크톱 또는 웹 글꼴 패키지](https://github.com/codingEzio/DeparturePixelZh-OSS/releases/tag/v0.1.1)를 다운로드할 수 있습니다. 일부 아이콘의 상위 라이선스 기록은 서로 다릅니다. [글꼴 고지](https://github.com/codingEzio/DeparturePixelZh-OSS/blob/main/NOTICE.md)를 참고하세요.
 
 ![DeparturePixelZh — 영문과 중국어 픽셀 글자를 하나의 고정폭 글꼴에](assets/departurepixelzh-social-card.png)
 
@@ -16,6 +16,7 @@
 
 ```sh
 git clone https://github.com/codingEzio/DeparturePixelZh-OSS.git ../X-DeparturePixelZh
+git checkout --detach "$(cat ../X-DeparturePixelZh/builder-version)"
 uv run departurepixelzh-builder build --recipe ../X-DeparturePixelZh/recipe.json --output Build
 uv run departurepixelzh-builder check --recipe ../X-DeparturePixelZh/recipe.json --output Build --release
 uv run -m unittest discover -s tests
