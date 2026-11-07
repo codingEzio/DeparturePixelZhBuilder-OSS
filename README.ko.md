@@ -1,0 +1,61 @@
+<img src="docs/icon.svg" alt="DeparturePixelZhBuilder 문서 아이콘" width="96" height="96">
+
+# X-DeparturePixelZhBuilder
+
+[English](README.md) · [简体中文](README.zh-Hans.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md)
+
+버전이 관리되는 레시피로 DeparturePixelZh와 DeparturePixelZh Compact를 만듭니다. 영문과 중국어 픽셀 글자, 개발자 아이콘을 하나의 고정폭 글꼴로 조합합니다.
+
+이 저장소는 빌더 소스입니다. 미리 빌드한 글꼴은 공개되지 않았으며 아이콘 재배포 권리는 글꼴 프로젝트의 고지에서 검토 중입니다.
+
+![DeparturePixelZh — 영문과 중국어 픽셀 글자를 하나의 고정폭 글꼴에](assets/departurepixelzh-social-card.png)
+
+## 시작
+
+[uv](https://docs.astral.sh/uv/)를 설치하고 DeparturePixelZh 글꼴 저장소를 이 저장소와 같은 상위 디렉터리에 둡니다. 릴리스 빌드에는 글꼴 레시피에 고정된 빌더 리비전을 사용하세요.
+
+```sh
+git clone https://github.com/codingEzio/DeparturePixelZh-OSS.git ../X-DeparturePixelZh
+uv run departurepixelzh-builder build --recipe ../X-DeparturePixelZh/recipe.json --output Build
+uv run departurepixelzh-builder check --recipe ../X-DeparturePixelZh/recipe.json --output Build --release
+uv run -m unittest discover -s tests
+```
+
+빌더를 로컬에서 개발할 때는 `build`에 `--development`를 추가할 수 있습니다. 리비전 고정을 건너뛰므로 릴리스 후보를 만들지 않습니다.
+
+## 동작
+
+레시피는 소스 URL과 SHA-256을 고정합니다. 빌더는 해당 URL에서 입력 파일을 다운로드하거나 캐시를 재사용하며, 고정된 SHA-256으로 검증합니다. macOS에 설치된 글꼴을 빌드 입력으로 읽지 않습니다. 빌더는 글자를 선택하고 공통 격자에 맞춘 뒤 TTF, WOFF2, 지원 범위, 체크섬, 출처 기록을 생성합니다. 영문과 아이콘은 한 칸, 전각 문자는 두 칸을 사용합니다. Compact는 더 좁은 칸을 사용합니다. 이모지는 시스템 대체 글꼴에 맡깁니다.
+
+글자 선택과 간격은 [docs/how-it-works.md](docs/how-it-works.md)에서 설명합니다.
+
+## 다른 명령
+
+- `install`: 검증한 글꼴을 설치하고 기록과 백업을 저장합니다. 중단된 설치는 다음 설치를 진행하기 전에 되돌립니다.
+- `check-installed`: 설치 기록과 실제 파일을 비교합니다.
+- `sync`: 사용 프로젝트의 매니페스트에 따라 글꼴, 라이선스 문서, 출처 기록을 복사합니다. 관리 파일이 도구 외부에서 변경되었다면 중지합니다.
+- `package --format desktop`은 TTF, `package --format web`은 WOFF2를 묶습니다. 기본값 `all`은 두 형식을 포함합니다.
+
+인수는 `uv run departurepixelzh-builder --help` 또는 각 명령의 `--help`를 참고하세요. 설치와 동기화는 예상하지 못한 변경을 발견하면 중지하여 복구를 명시적으로 처리하도록 합니다.
+
+`package`에는 하드 링크를 지원하는 파일 시스템이 필요합니다. 같은 이름의 기존 압축 파일이 바이트 단위로 동일하면 다시 실행할 수 있습니다. 내용이 다르면 기존 파일을 보존하고 중지하므로 다른 출력 위치를 지정하세요.
+
+동기화 중에는 다른 프로그램으로 사용 프로젝트의 파일을 변경하지 마세요. 중단 후 일반 `sync`를 실행하면 복구를 시도합니다. 충돌이나 판단할 수 없는 상태가 보고되면 복구 기록과 백업을 보존하고 직접 확인하세요. 프로세스 중단 후 복구가 정전 후 복구까지 보장하지는 않습니다.
+
+## 선택 사항: 원본 글꼴과 비교
+
+Homebrew가 설치된 macOS에서는 원본 글꼴을 설치해 모양을 비교할 수 있습니다. 빌드의 필수 조건이 아니며, DeparturePixelZh를 설치하거나 사용하는 데도 필요하지 않습니다.
+
+```sh
+brew install --cask font-departure-mono font-cubic-11
+```
+
+## 범위와 라이선스
+
+DeparturePixelZh 레시피를 위한 전용 빌더입니다. 범용 글꼴 편집기가 아니며 굵은 글꼴, 기울임꼴, 컬러 이모지를 추가하지 않습니다.
+
+빌더의 원본 코드는 [MIT](LICENSE-MIT)를 사용합니다. 생성된 글꼴에는 별도의 OFL 및 구성 요소 라이선스 조건이 적용됩니다. 글꼴을 재배포할 때는 글꼴 저장소의 라이선스 문서를 유지하세요.
+
+[로컬 소스 검사 및 유지 관리](docs/maintenance.md).
+
+문서 아이콘: codingEzio, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [허가 범위](docs/ARTWORK-LICENSE.md). 이 허가는 `docs/icon.svg`에만 적용됩니다. 기존 이미지, 글꼴, 코드 및 타사 자료에는 각각의 조건이 계속 적용됩니다.
